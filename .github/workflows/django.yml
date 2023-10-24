@@ -24,7 +24,9 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
+        cd ProductInventory
         pip install -r requirements.txt
     - name: Run Tests
       run: |
+        cd ProductInventory
         python manage.py test
