@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+  product_inventory_backend:
+    build:
+      context: ./ProductInventory/.
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./ProductInventory:/app
